@@ -65,12 +65,10 @@ innovus -stylus -files ../scripts/layout.tcl -log innovus.log
 cd ${PROJECT_DIR}/frontend
 
 # Compile SDF
-xmsdfc -iocondsort -compile ../backend/layout/deliverables/${DESIGNS}_normal_layout_MAX_10MHz.sdf
+xmsdfc -iocondsort -compile ...
 
 # Run simulation
-xrun -timescale 1ns/10ps -mess -64bit -v200x -v93 -noneg_tchk \
-     -sv ${DESIGNS}_tb.sv -top ${DESIGNS}_tb -access +rwc \
-     -sdf_cmd_file sdf/sdf_cmd_file_layout.cmd -input vetor.txt +define+DUMP_VCD
+xrun -timescale 1ns/10ps ...
 
 3. Key Files
 
@@ -107,15 +105,6 @@ xrun -timescale 1ns/10ps -mess -64bit -v200x -v93 -noneg_tchk \
 
 5. Automation
 Full Flow Automation (via run_all.sh)
-
-graph TD
-    A[run_all.sh] --> B[complete_flow.tcl]
-    B --> C[run_first.tcl]
-    B --> D[run_sdf_flow.tcl]
-    B --> E[Logic Synthesis]
-    B --> F[SDF Pre-layout]
-    B --> G[Layout]
-    B --> H[SDF Post-layout]
 
 6. Notes
 
