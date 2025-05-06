@@ -1,134 +1,91 @@
-Course Description: Physical Design of Integrated Circuits
+## Physical Design
 
-The Physical Design of Integrated Circuits course aims to equip students with the fundamental knowledge and practical skills required to transition from logical design to physical implementation of digital circuits, using a specific fabrication technology. Throughout the course, students learn how to transform hardware description language (HDL) code into a fabrication-ready physical layout (GDSII), mastering backend design flow stages and computer-aided design (CAD) tools.
+**Course: Specialization in Microelectronics**  
 
-The curriculum covers key topics such as timing analysis, physical constraints, and the use of industry-standard tools for synthesis, floorplanning, placement, routing, and physical verification (DRC/LVS). Students develop complete design projects that go through the entire backend flow, gaining hands-on experience with configuration files and interpreting synthesis and physical implementation reports.
+### Course Objectives
+- **Understand Theoretical Foundations**: Gain knowledge of the theoretical principles underlying integrated circuit design.
+- **Comprehend Backend Flow**: Learn to analyze configuration files, reports, and key steps in a backend design flow.
+- **Timing Analysis**: Explore timing aspects of circuits in a given fabrication technology.
+- **Hands-on CAD Tool Experience**: Work with CAD tools in a practical setting to understand the physical design process.
+- **Execute Backend Flow**: Perform the complete backend flow of a project, from HDL to GDSII.
 
-Physical Design of Integrated Circuits
-🎯 Course Objective
+### Key Steps in the Backend Design Flow
 
-This course introduces students to the fundamentals of physical design for digital integrated circuits, focusing on the backend design flow. The goal is to develop a solid understanding of the complete flow from HDL (Hardware Description Language) to GDSII, while using industry-standard EDA tools to perform synthesis, floorplanning, placement, clock tree synthesis (CTS), routing, and verification.
+#### **Synthesis Analysis**
+- **Design Rule Constraints**: During optimization, the logic synthesis tool ensures all design rule constraints are satisfied. These constraints may be derived from module or port attributes or from the technology library.
+  - A design cannot proceed to further ASIC flow stages if the following constraints are not met:
+    - **Max Transition**
+    - **Max Fanout**
+    - **Max Capacitance**
+- **Timing Verification**: Timing analysis is performed during synthesis to ensure all timing requirements are satisfied.
 
-Students will also learn to work with design constraints, interpret timing and power reports, and understand the impact of physical implementation on circuit performance.
-🧠 Topics Covered
+#### **Constraint Analysis**
+- **Max Fanout**: Number of load gates connected to the output of a driving gate.
+  - High fanout can slow down the driving gate.
+- **Fan-in**: Number of inputs to a gate.
 
-    Theoretical foundations of physical design
+#### **Stages in the Design Flow**
+1. General Definitions
+2. Loading Technology Files
+3. Reading HDL Files
+4. Elaborate
+5. Applying Constraints
+6. Generic Synthesis
+7. Mapped Synthesis
+8. Synthesis Results Analysis
+9. File Export
 
-    Backend flow overview: HDL → Netlist → Floorplanning → Placement → CTS → Routing → GDSII
+## Final Project: 32-bit IEEE 754 Floating-Point Multiplier
 
-    Static Timing Analysis (STA) and delay optimization
+### Project Overview
+The final project implemented a 32-bit floating-point multiplier adhering to the IEEE 754 standard with support for "round toward zero" rounding mode. The project encapsulated the entire physical design flow, from RTL description in SystemVerilog to a fabrication-ready layout in 45nm technology.
 
-    Use of configuration files (.sdc, .spef, .lib, .lef, .gds)
+### Relevant Learnings from the Course
 
-    CAD tool usage: logic synthesis, layout implementation, and physical verification
+#### **Theoretical Knowledge Acquired**
+- **Floating-Point Representation**: Advanced understanding of the IEEE 754 standard and hardware arithmetic computation.
+- **Timing and Performance**: Insights into critical paths, timing slack, and performance optimization techniques.
+- **Power Analysis**: Comprehension of energy consumption components (dynamic, static, leakage) and reduction methods.
+- **Process Corners**: Circuit behavior evaluation under varying process, voltage, and temperature (PVT) conditions.
 
-📦 Project Deliverables
+#### **Technical Skills Developed**
+- **Complete Design Flow Execution**: Mastery of backend processes, from HDL to GDSII, including logic synthesis, floorplanning, placement, CTS, routing, and physical verification.
+- **Static Timing Analysis (STA)**: Ability to interpret timing reports and resolve setup and hold violations.
+- **Constraint Development**: Crafting timing and physical constraints to guide synthesis and implementation.
+- **Automated Workflow**: Creating scripts to automate repetitive tasks, enhancing reproducibility and efficiency.
 
-Students will complete a full backend design project including:
+#### **Tool Proficiencies**
+- **Logic Synthesis**: Transforming RTL code into structural netlists with optimizations for area, timing, and power.
+- **Physical Implementation**: Expertise in floorplanning, placement, CTS, and routing, accounting for trade-offs between quality metrics.
+- **Physical Verification**: Using DRC (Design Rule Check) and LVS (Layout vs. Schematic) to ensure manufacturing compliance.
+- **Post-Layout Simulation**: Validating designs with real delays through SDF-annotated simulations.
 
-    Verilog/SystemVerilog source files
+### Project Methodology Insights
+- **Verification Importance**: Extensive multi-level verification was crucial to ensure design correctness.
+- **Multi-Objective Optimization**: Balancing conflicting requirements (area, power, performance) based on project goals.
+- **Architectural Decisions**: Recognizing how early architectural choices significantly impact final physical circuit metrics.
+- **Automation Value**: Leveraging workflow automation to explore multiple configurations and ensure consistent results.
 
-    Synthesis and place-and-route scripts
+### Project Structure
+The project was structured to streamline the physical design workflow:
+```
+multiplier32FP/
+├── frontend/                 # RTL code and verification
+├── backend/                  # Physical design flow files
+│   ├── synthesis/            # Logic synthesis
+│   ├── layout/               # Physical implementation
+│   └── verification/         # Post-layout verification
+└── docs/                     # Project documentation
+```
 
-    Constraint files (.sdc, .tcl)
+### Automation in the Workflow
+Automation scripts were developed to streamline the workflow, minimizing manual errors and boosting productivity. These scripts supported all stages, from synthesis to final verification, enabling:
+- Rapid exploration of configurations and trade-offs.
+- Reproducibility of the entire design flow.
+- Comparative analysis across different design versions.
+- Standardized report generation for consistent analysis.
 
-    Layout files (LEF/DEF/GDSII)
+### Conclusions
+This final project provided a comprehensive application of the knowledge and skills acquired during the course. By implementing a 32-bit IEEE 754 multiplier, the project bridged high-level algorithmic considerations and detailed physical implementation.
 
-    Reports: timing, power, area
-
-    Final documentation (PDF) with flow explanation and screenshots
-
-🗂️ Suggested Repository Structure
-
-project-physical-design/
-│
-├── src/                    # HDL source files (Verilog/VHDL)
-│   └── multiplier32.v
-│
-├── constraints/            # Timing and physical constraints
-│   ├── design.sdc
-│   └── floorplan.tcl
-│
-├── scripts/                # Synthesis and PnR automation scripts
-│   ├── synth.tcl
-│   └── pnr.tcl
-│
-├── reports/                # Reports generated during the flow
-│   ├── timing_report.rpt
-│   ├── power_report.rpt
-│   └── area_report.rpt
-│
-├── layout/                 # Layout files
-│   ├── design.gds
-│   ├── design.lef
-│   └── design.def
-│
-├── verification/           # DRC/LVS/STA results
-│   ├── drc.rpt
-│   ├── lvs.rpt
-│   └── sta_summary.rpt
-│
-└── docs/                   # Final documentation
-    └── final_report.pdf
-
-🛠️ EDA Tools Used
-
-    Tool availability may vary by institution or license.
-
-    Cadence Genus – Logic synthesis
-
-    Cadence Innovus – Physical design (PnR, CTS, Routing)
-
-    Cadence Virtuoso – Layout view and verification (optional/custom)
-
-    KLayout / Magic VLSI – Open-source layout viewing (optional)
-
-    Synopsys Design Compiler – Alternative to Genus
-
-    IRSIM / Netgen / OpenSTA – Optional open tools for STA and checks
-
-⚙️ Typical Commands & Workflow
-
-# Synthesis with Genus
-genus -f scripts/synth.tcl
-
-# Place & Route with Innovus
-innovus -f scripts/pnr.tcl
-
-# View layout (if using KLayout)
-klayout layout/design.gds
-
-# Run timing analysis
-opensta
-read_liberty constraints/tech.lib
-read_verilog netlist.v
-read_sdc constraints/design.sdc
-report_checks
-
-📚 Prerequisites
-
-    Digital Logic and Architecture basics
-
-    Proficiency in Verilog or SystemVerilog
-
-    Basic Unix/Linux command-line usage
-
-    Familiarity with Makefiles and scripting (TCL)
-
-📌 Final Submission Checklist
-
-HDL Source Code
-
-Constraint Files
-
-Synthesis Scripts
-
-PnR Scripts
-
-Layout Files (GDSII, LEF, DEF)
-
-Timing and Power Reports
-
-Physical Verification Reports (DRC/LVS)
-
-Final PDF Documentation with diagrams and explanations
+The experience of contrasting implementations targeting 10MHz and 110MHz demonstrated the trade-offs in integrated circuit design and underscored the importance of structured design methodologies. Practical CAD tool experience and a complete understanding of the design flow leave students well-equipped for future, more complex projects.
