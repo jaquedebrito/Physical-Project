@@ -24,6 +24,41 @@ This repository presents a complete **Physical Design** project implementing a *
 
 > 💡 **Quick Links:** [Summary](SUMMARY.md) | [Project Specification](Final_Project/Especificações_do_Projeto_Final.pdf) | [Full Report](Final_Project/multiplier32FP/Projeto%20Físico.pdf)
 
+### 🔄 Design Flow Visualization
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                      PHYSICAL DESIGN FLOW                           │
+└─────────────────────────────────────────────────────────────────────┘
+
+    RTL Design (SystemVerilog)
+           ↓
+    ┌──────────────────┐
+    │  Logic Synthesis │  ← Cadence Genus
+    │    (10/110 MHz)  │
+    └────────┬─────────┘
+             ↓
+    Structural Netlist + Constraints
+             ↓
+    ┌──────────────────┐
+    │ Physical Layout  │  ← Cadence Innovus
+    │  (Floorplan +    │
+    │   Place & Route) │
+    └────────┬─────────┘
+             ↓
+    ┌──────────────────┐
+    │    DRC / LVS     │  ← Physical Verification
+    │   Verification   │
+    └────────┬─────────┘
+             ↓
+    ┌──────────────────┐
+    │  Post-Layout     │  ← Xcelium Simulation
+    │   Simulation     │     (with SDF delays)
+    └────────┬─────────┘
+             ↓
+    GDSII (Tape-Out Ready) ✅
+```
+
 ---
 
 ## 📚 Table of Contents
