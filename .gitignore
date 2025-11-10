@@ -1,0 +1,65 @@
+# Physical Design Project - Git Ignore File
+
+# CAD Tool Working Files
+*.log
+*.rpt
+*.history
+*.jou
+*.str
+*.rdb
+*.dbg
+
+# Synthesis and Layout Work Directories
+**/work/
+**/tmp/
+
+# Generated Files
+*.v.bak
+*.sdc.bak
+*.def
+*.lef
+*.gds
+*.odb
+*.sdf
+*.spef
+*.spi
+*.lib
+*.db
+
+# Simulation Files
+*.vcd
+*.fsdb
+*.key
+*.trn
+*.dsn
+xcelium.d/
+*.shm/
+*.diag
+INCA_libs/
+*.so
+
+# Compiled SDF
+*.sdf.X
+
+# Reports and Deliverables (keep in repository but ignore temporary versions)
+*_temp.rpt
+*_backup.rpt
+
+# OS and Editor Files
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Temporary files
+/tmp/
+*.tmp
+*.bak
